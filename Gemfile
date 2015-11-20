@@ -13,6 +13,8 @@ gem 'bcrypt-ruby'
 
 gem 'rake'
 
+gem 'bcrypt'
+
 gem 'shotgun'
 
 group :test do
