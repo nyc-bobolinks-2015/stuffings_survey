@@ -10,7 +10,7 @@ post '/users/index' do
   @user = User.find_by(email: params[:email], password: params[:password])
   if @user && @user.password == params[:user] [:password]
     session[:user_id] = @user.id
-    redirect '/surveys'
+    redirect ('/surveys')
   else
     erb :'/users'
   end
@@ -23,7 +23,7 @@ end
 post '/users' do
   @user = User.new(params[:user])
   if @user.save
-    redirect "/surveys"
+    redirect ("/surveys")
   else
     erb :'/users/new'
   end
