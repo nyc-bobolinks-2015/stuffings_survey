@@ -1,3 +1,4 @@
+<% if !logged_in? %>
 <form method="post" action="/users">
   <label for="email" class="">Email</label>
   <input id="email" type="email" name="user[email]" value="" tabindex="1">
@@ -5,3 +6,4 @@
   <input id="pass" type="password" name="user[password]" value="" tabindex="2">
   <input type="submit" value="sign in" tabindex="3">
 </form>
+<% end %>
