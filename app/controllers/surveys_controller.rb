@@ -48,6 +48,10 @@ post '/surveys/:survey_id/questions/:question_id' do
   end
 end
 
-get '/surveys/:survey_id/statistics'
+get '/surveys/:survey_id/statistics' do
+  @survey = Survey.find_by_id(params[:survey_id])
+  @metrics = @survey.statistics
+  erb :'surveys/statistics'
+end
 
 
