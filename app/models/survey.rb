@@ -5,11 +5,7 @@ class Survey < ActiveRecord::Base
   belongs_to :user
 
   attr_accessor :stats_for_all_answers
-
-  def initialize
-    super
-    @stats_for_all_answers = []
-  end
+  @stats_for_all_answers = []
 
   def number_of_participants
     self.answers.map{|answer| answer.user_id}.uniq.count
