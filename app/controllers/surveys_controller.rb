@@ -1,3 +1,5 @@
+require 'pry'
+
 get '/surveys' do
   if !logged_in?
     redirect ('/')
@@ -17,8 +19,20 @@ get '/surveys/new' do
 end
 
 post '/surveys' do
-  survey = Survey.new(user: session[:user_id], title: params[:title], description: params[:description])
-  if survey.save
+  survey = Survey.create(user_id: session[:user_id], title: params[:survey][:title], description: params[:survey][:description])
+  params[:survey].delete('title')
+  params[:survey].delete('description')
+  binding.pry
+  params[:survey].each do |key, value|
+    if key == "question"
+      last_quest = Question.create(survey_id: survey.id, text: value)
+    elsif key == "choice"
+      Choice.create(question_id: last_quest.id, text: value)
+    end
+  end
+  binding.pry
+  if survey.persisted?
+    binding.pry
     redirect('/surveys')
   else
     @errors = survey.errors.full_messages

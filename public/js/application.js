@@ -21,6 +21,17 @@ $(document).ready(function() {
     });
   });
 
-  $('')
+  $('form.finish_survey').on('submit', function(event){
+    event.preventDefault();
+    
+
+    // $('div.add_question').children().serialize();
+    debugger
+    $.ajax({
+      method: "post",
+      url:    $(event.target).attr('action'),
+      data: $(event.target).serialize()
+    })
+  });
 
 });
