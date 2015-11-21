@@ -27,6 +27,8 @@
         <img src="../images/stuffing.jpg" class="full_width">
         <nav class="">
           <ul class="clear_left">
+            <li><a class="nav_text bold" href="/"
+            </li>
           <% if logged_in? && current_user %>
             <li class=""><a class="nav_text bold" href="/users/<%=current_user.id%>"><%=current_user.username.downcase%></a></li>
             <li class=""><a class="nav_text" href="/users/logout">logout</a></li>
@@ -39,7 +41,7 @@
         <img src="" class="">
       </div>
   </header>
-  
+
   <%= yield %>
 
   <footer class="">

@@ -1,9 +1,9 @@
 get '/surveys' do
-  if logged_in?
+  if !logged_in?
+    redirect ('/')
+  else
     @surveys = Survey.all
     erb :'surveys/index'
-  else
-    redirect ('/')
   end
 end
 
@@ -70,6 +70,3 @@ end
 get '/surveys/:id' do
   erb :'surveys/show'
 end
-
-
-
