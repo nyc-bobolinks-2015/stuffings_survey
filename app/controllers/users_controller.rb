@@ -6,13 +6,14 @@ get '/users' do
   erb :'/users/index'
 end
 
-post '/users/index' do
-  @user = User.find_by(email: params[:email], password: params[:password])
-  if @user && @user.password == params[:user] [:password]
+post '/users/login' do
+  @user = User.find_by(email: params[:email])
+  if @user && @user.password == params[:password]
     session[:user_id] = @user.id
     redirect ('/surveys')
   else
-    erb :'/users'
+    # include error message that user information isn't correct
+    erb :'/users/index'
   end
 end
 
@@ -20,13 +21,19 @@ get '/users/new' do
   erb :'/users/new'
 end
 
-post '/users' do
+post '/users/new' do
   @user = User.new(params[:user])
   if @user.save
+    session[:user_id] = @user.id
     redirect ("/surveys")
   else
     erb :'/users/new'
   end
+end
+
+get '/users/logout' do
+  session.clear
+  redirect("/")
 end
 
 get '/users/:id' do
@@ -39,7 +46,4 @@ get '/users/:id/edit' do
   erb :'/users/edit'
 end
 
-get '/users/logout' do
-  session.clear
-  redirect("/")
-end
+

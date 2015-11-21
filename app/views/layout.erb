@@ -23,16 +23,16 @@
 </head>
 <body>
   <header>
-      <div>
-        <p class="header_text">survey</p>
+      <div class="full_width">
+        <img src="../images/stuffing.jpg" class="full_width">
         <nav class="">
-          <ul>
+          <ul class="clear_left">
           <% if logged_in? && current_user %>
-            <li class=""><a class="bold "href="/users/<%=current_user.id%>"><%=current_user.username.downcase%></a></li>
-            <li class=""><a href="/users/logout">logout</a></li>
+            <li class=""><a class="nav_text bold" href="/users/<%=current_user.id%>"><%=current_user.username.downcase%></a></li>
+            <li class=""><a class="nav_text" href="/users/logout">logout</a></li>
           <% else %>
-            <li class=""><a href="/users/new">register</a></li>
-            <li class=""><a href="/users">login</a></li>
+            <li class=""><a class="nav_text bold" href="/users/new">register</a></li>
+            <li class=""><a class="nav_text bold" href="/users/login">login</a></li>
           <% end %>
           </ul>
         </nav>
