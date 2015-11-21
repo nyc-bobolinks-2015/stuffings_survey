@@ -110,6 +110,12 @@ a.nav_text {
     list-style-type: none;
 }
 
+a {
+    color: brown;
+    text-decoration: none;
+    list-style-type: none;
+}
+
 .center {
     text-align: center;
     position: center;

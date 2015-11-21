@@ -1,1 +1,10 @@
+<h3 class="center">PICK A SURVEY</h3>
 index.erb
+<div>
+  <% @surveys.each do |survey| %>
+    <a href="surveys/<%= survey.id %>"> <%= survey.title %> </a>
+  <% end %>
+</div>
+
+
+<a class="" href="/surveys/new">Make a new survey</a>
