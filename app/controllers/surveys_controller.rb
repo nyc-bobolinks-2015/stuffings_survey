@@ -59,4 +59,17 @@ get '/surveys/:survey_id/statistics' do
   erb :'surveys/statistics'
 end
 
+get '/surveys/add_question' do
+  erb :'surveys/_question', layout: !request.xhr?
+end
+
+get '/surveys/add_choice' do
+  erb :'surveys/_choice', layout: !request.xhr?
+end
+
+get '/surveys/:id' do
+  erb :'surveys/show'
+end
+
+
 

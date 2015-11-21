@@ -1,1 +1,24 @@
+<h3 class="center">CREATE YOUR SURVEY</h3>
 new.erb
+<div>
+  <form class="center top_buff" method="post" action="/surveys">
+    <label for="title" class="">Title</label>
+    <input id="title" type="text" name="survey[title]" value="" tabindex="1">
+    <label for="description" class="">Description</label>
+    <input id="description" type="text" name="survey[description]" value="" tabindex="2">
+
+    <% question_num = 0 %>
+    <button class="question" type="button">add question</button>
+
+    <div class="add_question center">
+
+    </div>
+
+
+
+
+
+
+    <input class="clear_left" type="submit" value="finish survey">
+  </form>
+</div>
