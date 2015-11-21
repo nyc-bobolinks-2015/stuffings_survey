@@ -1,5 +1,9 @@
 get '/' do
-  redirect '/users'
+  if !logged_in?
+    erb :'users/login'
+  else
+    redirect ('/surveys')
+  end
 end
 
 get '/users' do
