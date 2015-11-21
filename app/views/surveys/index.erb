@@ -2,7 +2,7 @@
 <div class= "surveys-list">
   <% @surveys.each do |survey| %>
     <div class="survey">
-      <a href="surveys/<%= survey.id %>"> <%= survey.title %> </a>
+      <a href="surveys/<%= survey.id %>/questions/1"> <%= survey.title %> </a>
     </div>
   <% end %>
 </div>

@@ -44,6 +44,7 @@ get '/surveys/:survey_id/questions/:question_id' do
   if !logged_in?
     redirect('/')
   else
+    @survey = Survey.find_by_id(params[:survey_id])
     @question = Question.find_by_id(params[:question_id])
     erb :'surveys/show'
   end
@@ -81,6 +82,3 @@ get '/surveys/add_choice' do
   erb :'surveys/_choice', layout: !request.xhr?
 end
 
-get '/surveys/:id' do
-  erb :'surveys/show'
-end
