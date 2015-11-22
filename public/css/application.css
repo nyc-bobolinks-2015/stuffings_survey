@@ -128,3 +128,5 @@ a {
 .top_buff {
     margin-top: 10px;
 }
+
+.initiallyHidden { display: none; }

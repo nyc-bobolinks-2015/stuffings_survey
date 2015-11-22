@@ -1,20 +1,21 @@
-<h3 class="center">CREATE YOUR SURVEY</h3>
-<div>
-  <form class="finish_survey center top_buff" method="post" action="/surveys">
+<h3 class="survey_name center">CREATE YOUR SURVEY</h3>
+
+<div class="survey">
+
+  <form class="create_survey center top_buff" method="post" action="/surveys">
     <label for="title" class="">Title</label>
     <input id="title" type="text" name="survey[title]" value="" tabindex="1">
     <label for="description" class="">Description</label>
     <input id="description" type="text" name="survey[description]" value="" tabindex="2">
+    <input class="clear_left" type="submit" value="create survey">
+  </form>
 
-    <% question_num = 0 %>
-    <button class="question" type="button">add question</button>
-
-    <div class="add_question center">
-
+    <div class="add_question initiallyHidden center">
+      <button class="question" type="button">add first question</button>
     </div>
 
+    <div class="all_done initiallyHidden center">
+      <button class="done" type="button">back to index</button>
+    </div>
 
-
-    <input class="finish_survey clear_left" type="submit" value="finish survey">
-  </form>
 </div>
