@@ -1,1 +1,21 @@
-show.erb
+<h3 class="center"><%= @survey.title %></h3>
+
+<div class="question">
+<%= @question.text %>
+
+<form action="/surveys/<%=@survey.id%>/questions/<%=@question.id%>" method="post">
+   <% @question.choices.each_with_index do |choice, index| %>
+     <input type="radio" name="choice" value="<%=choice.text%>"/><%=choice.text%>
+   <% end %>
+   <br>
+   <br>
+   <input type="submit" value="Next Question"/>
+</form>
+
+<div class="question-container"></div>
+  <br>
+    <br>
+ <a id="backBtn" href="/surveys" class="button">«Back</a><br>
+<br>
+  <br>
+</div>
