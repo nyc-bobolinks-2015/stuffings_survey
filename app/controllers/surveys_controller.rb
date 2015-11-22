@@ -54,10 +54,10 @@ post '/surveys/:survey_id/questions/:question_id' do
   choice = Choice.find_by(text: params[:choice])
   answer = Answer.new(survey_id: params[:survey_id], question_id: params[:question_id], choice: choice, user_id: session[:user_id])
   survey = Survey.find(params[:survey_id])
-  if answer.question == survey.questions.count && answer.save #checks if answer is last answer in survey
+  if answer.question.id == survey.questions.count && answer.save #checks if answer is last answer in survey
     stat_for_answer = survey.percent_answered_same(params[:question_id], answer.choice_id)
     survey.stats_for_all_answers=(stat_for_answer)
-    redirect('/surveys/:survey_id/statistics')
+    redirect("/surveys/#{survey.id}/statistics")
   elsif answer.save
     stat_for_answer = survey.percent_answered_same(params[:question_id], answer.choice_id)
     survey.stats_for_all_answers=(stat_for_answer)
