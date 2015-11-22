@@ -19,25 +19,8 @@ get '/surveys/new' do
 end
 
 post '/surveys' do
-  survey = Survey.create(user_id: session[:user_id], title: params[:survey][:title], description: params[:survey][:description])
-  params[:survey].delete('title')
-  params[:survey].delete('description')
-  binding.pry
-  params[:survey].each do |key, value|
-    if key == "question"
-      last_quest = Question.create(survey_id: survey.id, text: value)
-    elsif key == "choice"
-      Choice.create(question_id: last_quest.id, text: value)
-    end
-  end
-  binding.pry
-  if survey.persisted?
-    binding.pry
-    redirect('/surveys')
-  else
-    @errors = survey.errors.full_messages
-    erb :'surveys/index'
-  end
+  @survey = Survey.create(user_id: session[:user_id], title: params[:survey][:title], description: params[:survey][:description])
+  erb :'surveys/_data', layout: !request.xhr?
 end
 
 get '/surveys/:survey_id/questions/:question_id' do
@@ -75,7 +58,7 @@ get '/surveys/:survey_id/statistics' do
   erb :'surveys/statistics'
 end
 
-get '/surveys/add_question' do
+post '/surveys/add_question' do
   erb :'surveys/_question', layout: !request.xhr?
 end
 
@@ -83,3 +66,27 @@ get '/surveys/add_choice' do
   erb :'surveys/_choice', layout: !request.xhr?
 end
 
+post '/surveys/complete_question' do
+  info = params[:question]
+  s_id = info.pop.to_i
+  q_text = info.shift
+  question = Question.create(survey_id: s_id, text: q_text)
+  info.each do |text|
+    Choice.create(question_id: question.id, text: text)
+  end
+  erb :'surveys/_question', layout: !request.xhr?
+end
+
+get '/surveys/complete_survey' do
+  info = params[:question]
+  s_id = info.pop.to_i
+  q_text = info.shift
+  question = Question.create(survey_id: s_id, text: q_text)
+  info.each do |text|
+    Choice.create(question_id: question.id, text: text)
+  end
+end
+
+get '/surveys/:id' do
+  erb :'surveys/show'
+end
