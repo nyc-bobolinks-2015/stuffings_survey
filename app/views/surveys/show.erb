@@ -1,11 +1,21 @@
-<h3 class="center"></h3>
-<%= @survey.title %>
+<h3 class="center"><%= @survey.title %></h3>
+
+<div class="question">
 <%= @question.text %>
 
-<form action = "/surveys/<%=@survey.id%>/questions/<%=@question.id%>" method="post">
+<form action="/surveys/<%=@survey.id%>/questions/<%=@question.id%>" method="post">
    <% @question.choices.each_with_index do |choice, index| %>
-     <input type="radio" name="<%=index + 1%>" value="<%=choice.text%>"> <%=choice.text%>
+     <input type="radio" name="choice" value="<%=choice.text%>"/><%=choice.text%>
    <% end %>
+   <br>
+   <br>
+   <input type="submit" value="Next Question"/>
 </form>
 
-<a class="" href="/surveys/new">Make a new survey</a>
+<div class="question-container"></div>
+  <br>
+    <br>
+ <a id="backBtn" href="/surveys" class="button">«Back</a><br>
+<br>
+  <br>
+</div>
