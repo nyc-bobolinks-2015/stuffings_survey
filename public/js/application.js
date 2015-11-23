@@ -83,18 +83,19 @@ $(document).ready(function() {
     location.href = "/surveys";
   });
 
-  // $('#question-display').on('submit', function(event){
-  //   event.preventDefault();
+  $('#question-container').on('submit', '#question-display', function(event){
+    event.preventDefault();
+    var selected = $('input:radio[name=choice]:checked').val();    
 
-  //   $.ajax({
-  //     method: "post",
-  //     url: $(event.target).attr('action'),
-  //     data: $(event.target).serialize()
-  //   }).done(function(response){
-      
-  //   }).fail(function(error){
-  //     alert("Error:" + error)
-  //   })
-  // });
+    $.ajax({
+      method: "post",
+      url: $(event.target).attr('action'),
+      data: {choice: selected}
+    }).done(function(response){
+      $('#question').replaceWith(response)
+    }).fail(function(error){
+      alert("Error:" + error)
+    })
+  });
 
 });

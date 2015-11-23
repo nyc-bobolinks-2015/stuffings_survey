@@ -22,7 +22,7 @@ class Survey < ActiveRecord::Base
   end
 
   def clear_stats
-    stats_for_all_answers.clear
+    @stats_for_all_answers.clear
   end
 
   def end_of_survey?(answer)
