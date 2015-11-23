@@ -66,3 +66,8 @@ a {
 .smaller_text { font-size: .8em;}
 
 .inline { display: inline;}
+
+#created-by {
+    background-color: brown;
+    padding: 0.7em;
+}
