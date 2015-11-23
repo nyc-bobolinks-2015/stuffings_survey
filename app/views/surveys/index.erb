@@ -7,9 +7,9 @@
 <div class= "surveys-list">
   <% @surveys.each do |survey| %>
     <div class="survey">
-      <a href="surveys/<%= survey.id %>/questions/<%=survey.questions.first.id%>"> <%= survey.title %> </a>
+      <a href="surveys/<%= survey.id %>/questions/<%=survey.questions.first.id%>"> <%= survey.title %> </a> <p class="smaller_text inline">created by <%= survey.user.username.downcase %></p>
     </div>
   <% end %>
 </div>
 
-<a href="/surveys/new">Make a new survey</a>
+<p class="center"><a href="/surveys/new">Make a new survey</a></p>

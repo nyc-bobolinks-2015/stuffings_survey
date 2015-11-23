@@ -1,4 +1,4 @@
 This Is Your Stats Page!
 <% @stats.each do |stat| %>
-<div><%= stat[1][1] %>% of participants answered "<%= Choice.find_by_id(stat[1][0]).text %>" to the question: <%= Question.find_by_id(stat[0]).text %></div>
+<div><%= (stat[1][1]).to_i %>% of participants answered "<%= Choice.find_by_id(stat[1][0]).text %>" to the question: <%= Question.find_by_id(stat[0]).text %></div>
 <% end %>

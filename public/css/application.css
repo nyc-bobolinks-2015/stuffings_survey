@@ -62,3 +62,7 @@ a {
 }
 
 .initiallyHidden { display: none; }
+
+.smaller_text { font-size: .8em;}
+
+.inline { display: inline;}
