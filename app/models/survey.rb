@@ -1,12 +1,17 @@
 class Survey < ActiveRecord::Base
+  attr_accessor :stats_for_all_answers
+  
   has_many :questions, dependent: :destroy
   has_many :choices, through: :questions, dependent: :destroy
-  has_many :answers, through: :choices, dependent: :destroy
+  has_many :answers, dependent: :destroy
   belongs_to :user
 
-  attr_accessor :stats_for_all_answers
 
-  def after_initialize
+  def stats_nil?
+    @stats_for_all_answers == nil
+  end
+
+  def set_stats
     @stats_for_all_answers = {}
   end
   
@@ -15,6 +20,7 @@ class Survey < ActiveRecord::Base
   end
 
   def percent_answered_same(question_id, choice_id)
+    set_stats if stats_nil?
     number_of_same_answers = self.answers.where(question_id: question_id, choice_id: choice_id, survey_id: self.id).count
     percent = (number_of_same_answers / number_of_participants.to_f * 100).round(2)
     self.stats_for_all_answers.merge!({question_id => [choice_id, percent]})

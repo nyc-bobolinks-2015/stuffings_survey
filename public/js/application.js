@@ -83,4 +83,18 @@ $(document).ready(function() {
     location.href = "/surveys";
   });
 
+  // $('#question-display').on('submit', function(event){
+  //   event.preventDefault();
+
+  //   $.ajax({
+  //     method: "post",
+  //     url: $(event.target).attr('action'),
+  //     data: $(event.target).serialize()
+  //   }).done(function(response){
+      
+  //   }).fail(function(error){
+  //     alert("Error:" + error)
+  //   })
+  // });
+
 });

@@ -3,7 +3,7 @@
 <div class="question">
 <%= @question.text %>
 
-<form action="/surveys/<%=@survey.id%>/questions/<%=@question.id%>" method="post">
+<form id="question-display" action="/surveys/<%=@survey.id%>/questions/<%=@question.id%>" method="post">
    <% @question.choices.each_with_index do |choice, index| %>
      <input type="radio" name="choice" value="<%=choice.text%>"/><%=choice.text%>
    <% end %>

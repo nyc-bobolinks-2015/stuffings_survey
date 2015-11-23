@@ -37,9 +37,11 @@ post '/surveys/:survey_id/questions/:question_id' do
   answer = Answer.new(survey_id: params[:survey_id], question_id: params[:question_id], choice: choice, user_id: session[:user_id])
   survey = Survey.find(params[:survey_id])
   if survey.end_of_survey?(answer) && answer.save
+    survey.answers << answer
     survey.percent_answered_same(params[:question_id], answer.choice_id)
     redirect("/surveys/#{survey.id}/statistics")
   elsif answer.save
+    survey.answers << answer
     survey.percent_answered_same(params[:question_id], answer.choice_id)
     redirect("/surveys/#{survey.id}/questions/#{params[:question_id].to_i + 1}")
   else
@@ -50,8 +52,8 @@ end
 
 get '/surveys/:survey_id/statistics' do
   @survey = Survey.find_by_id(params[:survey_id])
-  @stats_for_all_answers = @survey.stats_for_all_answers
-  @survey.clear_stats
+  @stats = @survey.stats_for_all_answers
+  #@survey.clear_stats
   erb :'surveys/statistics'
 end
 
