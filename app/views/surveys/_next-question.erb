@@ -1,7 +1,4 @@
-<h3 class="center"><%= @survey.title %></h3>
-
-<div id="question-container">
-	<div id="question">
+<div id="question">
 	<%= @question.text %>
 
 	<form id="question-display" action="/surveys/<%=@survey.id%>/questions/<%=@question.id%>" method="post">
@@ -12,12 +9,4 @@
 	   <br>
 	   <input type="submit" value="Next Question"/>
 	</form>
-	</div>
 </div>
-
-<br>
-<br>
-<a id="backBtn" href="/surveys" class="button">«Back</a><br>
-<br>
-<br>
-

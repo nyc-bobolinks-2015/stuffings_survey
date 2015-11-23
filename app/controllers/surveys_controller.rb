@@ -9,7 +9,6 @@ get '/surveys' do
   end
 end
 
-
 get '/surveys/new' do
   if !logged_in?
     redirect('/')
@@ -36,15 +35,16 @@ end
 post '/surveys/:survey_id/questions/:question_id' do
   choice = Choice.find_by(text: params[:choice])
   answer = Answer.new(survey_id: params[:survey_id], question_id: params[:question_id], choice: choice, user_id: session[:user_id])
-  survey = Survey.find(params[:survey_id])
-  if answer.question.id == survey.questions.count && answer.save #checks if answer is last answer in survey
-    stat_for_answer = survey.percent_answered_same(params[:question_id], answer.choice_id)
-    survey.stats_for_all_answers=(stat_for_answer)
-    redirect("/surveys/#{survey.id}/statistics")
+  @survey = Survey.find(params[:survey_id])
+  @survey.answers << answer
+  if @survey.end_of_survey?(answer) && answer.save
+    @stats = @survey.get_all_stats
+    erb :'surveys/statistics', layout: !request.xhr?
+  elsif request.xhr? && answer.save
+    @question = Question.find_by_id(params[:question_id].to_i + 1)
+    erb :'surveys/_next-question', layout: false
   elsif answer.save
-    stat_for_answer = survey.percent_answered_same(params[:question_id], answer.choice_id)
-    survey.stats_for_all_answers=(stat_for_answer)
-    redirect("/surveys/#{survey.id}/questions/#{params[:question_id].to_i + 1}")
+    redirect("/surveys/#{@survey.id}/questions/#{params[:question_id].to_i + 1}")
   else
     @error = "Please select a valid answer"
     erb :'surveys/show'
@@ -53,8 +53,7 @@ end
 
 get '/surveys/:survey_id/statistics' do
   @survey = Survey.find_by_id(params[:survey_id])
-  @stats_for_all_answers = @survey.stats_for_all_answers
-  @survey.clear_stats
+  @stats = @survey.get_all_stats
   erb :'surveys/statistics'
 end
 
