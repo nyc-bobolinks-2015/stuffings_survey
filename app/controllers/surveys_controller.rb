@@ -17,6 +17,10 @@ get '/surveys/new' do
   end
 end
 
+get '/surveys/error' do
+  erb :'surveys/error'
+end
+
 post '/surveys' do
   @survey = Survey.create(user_id: session[:user_id], title: params[:survey][:title], description: params[:survey][:description])
   erb :'surveys/_data', layout: !request.xhr?
@@ -25,6 +29,8 @@ end
 get '/surveys/:survey_id/questions/:question_id' do
   if !logged_in?
     redirect('/')
+  elsif User.find(session[:user_id]).has_taken_survey?(params[:survey_id])
+    redirect('/surveys/error')
   else
     @survey = Survey.find_by_id(params[:survey_id])
     @question = Question.find_by_id(params[:question_id])
