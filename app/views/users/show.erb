@@ -1,0 +1,20 @@
+<h1><%=@user.username%>'s profile</h1>
+</br>
+<div>
+  <h2>Your Created Surveys:</h2>
+    <h3>
+      <%@user.surveys.each do  |survey|%>
+      <a href="/surveys/<%=survey.id%>"><%= survey.title %></a>
+      <%end%>
+    </h3>
+</div>
+
+
+<div>
+  <h2> Statistics for your created Surveys!</h2>
+    <h3>
+      <%@user.surveys.each do  |survey|%>
+      <a href="/surveys/<%=survey.id%>/statistics"><%= survey.title %></a>
+      <%end%>
+    </h3>
+</div>
