@@ -1,4 +1,9 @@
 <h3 class="center">PICK A SURVEY</h3>
+
+<% if @error %>
+	<%= @error %>
+<% end %>
+
 <div class= "surveys-list">
   <% @surveys.each do |survey| %>
     <div class="survey">
