@@ -1,4 +1,9 @@
 This Is Your Stats Page!
 <% @stats.each do |stat| %>
 <div><%= (stat[1][1]).to_i %>% of participants answered "<%= Choice.find_by_id(stat[1][0]).text %>" to the question: <%= Question.find_by_id(stat[0]).text %></div>
+
+<div style="background-color:grey;width:100%;height:2em"class="total">
+	<div style="background-color:blue;width:<%= (stat[1][1]).to_i %>%;height:2em"class="responded-same">
+	</div>
+</div>
 <% end %>
